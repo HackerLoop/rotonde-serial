@@ -1,0 +1,11 @@
+{
+  "type": "action",
+  "payload": {
+    "identifier": "SERIAL_WRITE",
+    "data": {
+      "port": "",
+      "data": "5",
+      "response": "SERIAL_WRITE_STATUS"
+    }
+  }
+}

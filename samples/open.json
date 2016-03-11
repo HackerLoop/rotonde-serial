@@ -1,0 +1,13 @@
+{
+  "type": "action",
+  "payload": {
+    "identifier": "SERIAL_OPEN",
+    "data": {
+      "port": "",
+      "baud": 38400,
+      "parser": "READLINE",
+      "separator": "\t\r\n",
+      "response": "SERIAL_OPEN_STATUS"
+    }
+  }
+}

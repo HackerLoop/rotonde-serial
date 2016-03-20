@@ -22,6 +22,14 @@ client.addLocalDefinition('action', 'SERIAL_OPEN', [
   },
 ]);
 
+client.addLocalDefinition('action', 'SERIAL_CLOSE', [
+  {
+    name: 'port',
+    type: 'string',
+    units: '',
+  },
+]);
+
 const portFields = [
   {
     name: 'comName',
@@ -200,8 +208,18 @@ client.actionHandlers.attach('SERIAL_OPEN', (open) => {
   };
   client.actionHandlers.attach('SERIAL_WRITE', writeHandler);
 
+  const closeHandler = (a) => {
+     if (a.data.port != open.port) {
+      return;
+    }
+
+    serialPort.close();
+  };
+  client.actionHandlers.attach('SERIAL_CLOSE', closeHandler);
+
   serialPort.on('close', () => {
     client.actionHandlers.detach('SERIAL_WRITE', writeHandler);
+    client.actionHandlers.detach('SERIAL_CLOSE', closeHandler);
     client.sendEvent(open.response, {
       status: 'CLOSED',
     });

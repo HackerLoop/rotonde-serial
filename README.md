@@ -2,7 +2,7 @@
 
 Rotonde module for serial communications.
 
-This module wraps (node-serialport)[https://github.com/voodootikigod/node-serialport].
+This module wraps [node-serialport](https://github.com/voodootikigod/node-serialport).
 
 # Device compatibility
 

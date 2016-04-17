@@ -18,7 +18,27 @@ client.addLocalDefinition('action', 'SERIAL_OPEN', [
   {
     name: 'baud',
     type: 'number',
-    units: 'baud',
+    units: '',
+  },
+  {
+    name: 'parser',
+    type: 'string',
+    units: 'RAW,READLINE',
+  },
+  {
+    name: 'separator',
+    type: 'string',
+    units: 'used for READLINE parser separator',
+  },
+  {
+    name: 'isBinary',
+    type: 'bool',
+    units: 'if set to true, all exchanges are encoded in base 64',
+  },
+  {
+    name: 'response',
+    type: 'string',
+    units: 'event name used for response',
   },
 ]);
 
@@ -58,7 +78,7 @@ const portFields = [
   },
   {
     name: 'serialNumber',
-    type: 'number',
+    type: 'string',
     units: ''
   },
   {
@@ -70,34 +90,6 @@ const portFields = [
 client.addLocalDefinition('event', 'SERIAL_PORTS_AVAILABLE', portFields, true);
 client.addLocalDefinition('event', 'SERIAL_PORT_DISCOVERED', portFields);
 client.addLocalDefinition('event', 'SERIAL_PORT_LOST', portFields);
-
-client.addLocalDefinition('action', 'SERIAL_OPEN', [
-  {
-    name: 'port',
-    type: 'string',
-    units: '',
-  },
-  {
-    name: 'parser',
-    type: 'string',
-    units: 'RAW,READLINE',
-  },
-  {
-    name: 'separator',
-    type: 'string',
-    units: 'used for READLINE parser separator',
-  },
-  {
-    name: 'isBinary',
-    type: 'bool',
-    units: 'if set to true, all exchanges are encoded in base 64',
-  },
-  {
-    name: 'response',
-    type: 'string',
-    units: 'event name used for response',
-  },
-]);
 
 client.addLocalDefinition('action', 'SERIAL_WRITE', [
   {

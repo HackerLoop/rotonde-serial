@@ -42,7 +42,7 @@ Contains the list of available serial ports on the system.
 
 | *field name* | *type* | *units/example*           |
 |--------------|--------|---------------------------|
-| ports        | array  | list of serial ports, each serial ports in the form described in the (Serial port structure)[#] section |
+| ports        | array  | list of serial ports, each serial ports in the form described below |
 
 Each ports as follows:
 

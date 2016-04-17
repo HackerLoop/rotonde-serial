@@ -1,0 +1,7 @@
+{
+  "type": "action",
+  "payload": {
+    "identifier": "SERIAL_LIST",
+    "payload": {}
+  }
+}

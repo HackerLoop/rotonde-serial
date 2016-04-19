@@ -147,7 +147,7 @@ client.actionHandlers.attach('SERIAL_OPEN', (open) => {
     });
     return;
   }
-  const parser = open.parser == 'RAW' ? serialport.parsers.raw : serialport.parsers.readline(open.separator || '\r');
+  const parser = open.parser == 'RAW' || open.isBinary ? serialport.parsers.raw : serialport.parsers.readline(open.separator || '\r');
 
   const serialPort = new serialport.SerialPort('/dev/' + open.port, {
     parser,
@@ -165,7 +165,9 @@ client.actionHandlers.attach('SERIAL_OPEN', (open) => {
 
   serialPort.on('open', () => {
     serialPort.on('data', (data) => {
-      data = open.isBinary ? atob(data) : data;
+      if (typeof data == 'object' && data.toString) {
+        data = data.toString('base64');
+      }
       client.sendEvent('SERIAL_READ', {
         port: open.port,
         data,
@@ -181,7 +183,7 @@ client.actionHandlers.attach('SERIAL_OPEN', (open) => {
     if (a.data.port != open.port) {
       return;
     }
-    const data = open.isBinary ? btoa(a.data.data) : a.data.data;
+    const data = open.isBinary ? new Buffer(a.data.data, 'base64') : a.data.data;
     serialPort.write(data, (err) => {
       if (err) {
         sendError(a.data.response, err);
